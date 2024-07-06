@@ -43,31 +43,31 @@ public class Album {
     /**
      * static inner class
      */
-    private static class SongList {
-        private ArrayList<Song> songs;
+    private static class SongList extends ArrayList<Song> {
 
         private SongList() {
-            songs = new ArrayList<>();
+            super();
         }
 
-        private boolean add(Song song) {
-            if (songs.contains(song)) {
+        @Override
+        public boolean add(Song song) {
+            if (this.contains(song)) {
                 return false;
             }
-            songs.add(song);
+            super.add(song);
             return true;
         }
 
         private Song findSong(int trackNumber){
             int index = trackNumber - 1;
-            if ((index > 0) && (index <= songs.size())) {
-                return songs.get(index);
+            if ((index >= 0) && (index <= this.size())) {
+                return this.get(index);
             }
             return null;
         }
 
         private Song findSong(String title) {
-            for (Song s : songs) {
+            for (Song s : this) {
                 if (s.getTitle().equals(title)) {
                     return s;
                 }
